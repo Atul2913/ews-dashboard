@@ -1,0 +1,68 @@
+
+==============================
+EWS REPORT - Jan-26
+==============================
+
+--- SUMMARY ---
+Total High Risk: 9
+Still High Risk (Dec-25 -> Jan-26): 0
+Improved: 0
+New Risk: 9
+
+--- KEY ISSUES ---
+Low Coverage: 47 (Raj Amberish Singh, Venkatraman  E, Kanishk  Saraswat)
+High Discount: 70 (MANOJ KUMAR  MUNI, RAM CHANDRA  SAHU, Rk RAMAKANTH Reddy)
+High Stock: 197 (DEBASISH  CHAKRABORTY, SANDEEP  BANERJEE, JASBIR SINGH SAINI)
+
+--- TOP HIGH RISK EMPLOYEES ---
+- Subhamraj  Panda (CALCUTTA-ZM) - Score 7
+- Ashish Kumar Yadav (DELHI-ZM) - Score 7
+- Kanishk  Saraswat (DELHI-ZM) - Score 6
+- Divya  Tripathi (GHAZIABAD-ZM) - Score 6
+- Ritik  Kumar (LUCKNOW-ZM) - Score 6
+
+--- NEW HIGH RISK EMPLOYEES ---
+Kanishk  Saraswat, Divya  Tripathi, Ritik  Kumar, Anchal  ., Chirag  Sharma
+
+--- ZONE-WISE RISK ---
+- GHAZIABAD-ZM: 3
+- DELHI-ZM: 2
+- CHENNAI-ZM: 1
+- CALCUTTA-ZM: 1
+- LUCKNOW-ZM: 1
+- PUNJAB-ZM: 1
+
+--- MANAGER-WISE RISK ---
+- CHANDIGARH-SD: 1
+- CUTTACK-SD: 1
+- GHAZIABAD-SD: 1
+- GHAZIABAD-ZM: 1
+- JAIPUR-SD: 1
+- JALANDHAR-SD: 1
+- MEERUT-SD: 1
+- MUMBAI-NSM: 1
+- TRICHUR-SD: 1
+
+--- RISK DISTRIBUTION ---
+- Low Risk: 504
+- Medium Risk: 187
+- High Risk: 9
+
+--- TREND ---
+Dec-25: 0 -> Jan-26: 9
+
+--- ACTIONS ---
+
+- Reduce stock levels
+- Improve coverage visits
+- Control discount practices
+- Monitor high-risk employees closely
+
+
+--- AI INSIGHTS ---
+Here are 4 short insights:
+
+1. We have a total of 9 employees who are currently at high risk.
+2. None of the previously high-risk employees are still in that category, which is good.
+3. Unfortunately, none of the employees who were previously high-risk have shown improvement.
+4. All 9 high-risk employees are new to this category, indicating a new set of challenges that need to be addressed.
