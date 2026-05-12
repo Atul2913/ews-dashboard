@@ -88,7 +88,7 @@ Feb-26: 0 -> Mar-26: 43
 --- AI INSIGHTS ---
 Here are 4 short insights:
 
-1. We still have a total of 43 employees who are considered High Risk.
-2. Unfortunately, 4 employees have not shown any improvement and are still considered High Risk.
-3. On a positive note, 3 employees have improved their situation and are no longer considered High Risk.
-4. However, we have a new concern with 39 employees who have recently become High Risk, which is a significant increase.
+1. We have a total of 43 employees who are considered High Risk.
+2. Unfortunately, 4 employees are still at High Risk, showing no improvement.
+3. On a positive note, 3 employees have shown improvement and are no longer at High Risk.
+4. We have a new concern with 39 employees who have recently become High Risk, which is a significant increase.
