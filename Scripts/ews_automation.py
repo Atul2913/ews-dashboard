@@ -200,12 +200,17 @@ if USE_REPORT_SCORE:
 
     print("\n✅ Using Report Score")
 
-    active_df['EWS_Score'] = (
-        active_df['Count of Red Flags']
-    )
+    # ==============================
+    # CLEAN SCORE
+    # ==============================
+
+    active_df['EWS_Score'] = pd.to_numeric(
+        active_df['Count of Red Flags'],
+        errors='coerce'
+    ).fillna(0)
 
     # ==============================
-    # STANDARDIZE RISK LEVEL
+    # CLEAN CATEGORY
     # ==============================
 
     active_df['Category'] = (
@@ -215,6 +220,9 @@ if USE_REPORT_SCORE:
         .str.lower()
     )
 
+    # ==============================
+    # STANDARDIZE RISK LEVEL
+    # ==============================
 
     def clean_risk(x):
 
@@ -224,13 +232,25 @@ if USE_REPORT_SCORE:
         elif "medium" in x:
             return "Medium Risk"
 
-        else:
+        elif "low" in x:
             return "Low Risk"
 
+        else:
+            return "Low Risk"
 
     active_df['Risk_Level'] = (
         active_df['Category']
         .apply(clean_risk)
+    )
+
+    # ==============================
+    # DEBUG PRINT
+    # ==============================
+
+    print("\n📌 RISK LEVEL COUNTS:")
+    print(
+        active_df['Risk_Level']
+        .value_counts()
     )
 
 # =====================================================
@@ -330,7 +350,14 @@ else:
             return "Low Risk"
 
     active_df['Risk_Level'] = (
-        active_df['EWS_Score'].apply(risk)
+        active_df['EWS_Score']
+        .apply(risk)
+    )
+
+    print("\n📌 RISK LEVEL COUNTS:")
+    print(
+        active_df['Risk_Level']
+        .value_counts()
     )
 
 # ==============================
