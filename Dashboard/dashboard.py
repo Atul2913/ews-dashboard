@@ -577,6 +577,29 @@ st.markdown('</div>', unsafe_allow_html=True)
 # ==========================================
 # EXECUTIVE REPORT
 # ==========================================
+
+# ==============================
+# LOAD AI REPORT
+# ==============================
+
+try:
+
+    report_path = f"output/EWS_Report_{month}.txt"
+
+    with open(
+        report_path,
+        "r",
+        encoding="utf-8"
+    ) as f:
+
+        report_text = f.read()
+
+except:
+
+    report_text = (
+        "No AI insights available"
+    )
+
 st.markdown(f"""
 <div class="report-box">
 
