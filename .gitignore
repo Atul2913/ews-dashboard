@@ -1,0 +1,4 @@
+github key.txt
+code.txt
+*.pyc
+__pycache__/

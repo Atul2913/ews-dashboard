@@ -1,4 +1,0 @@
-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
-
-
-C:\Python_Incentives_Calc_Project\.venv\Scripts\python.exe Scripts\ews_automation.py
