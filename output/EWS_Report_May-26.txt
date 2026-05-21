@@ -1,7 +1,5 @@
-The absence of any improvement in high-risk employee status suggests a persistent vulnerability in our operational landscape, underscoring the need for targeted interventions to mitigate potential business risks. 
+35 high-risk employees, accounting for 5% of the total workforce, pose a significant business risk, with potential annual turnover costs of 15% to 20% of their total annual salary, translating to substantial operational concerns. This number has remained stagnant, with no improvements observed, indicating ineffective manager interventions.
 
-The concentration of high-risk employees in specific zones, such as Chennai and Ghaziabad, indicates a possible correlation between geographic location and employee behavior, warranting a nuanced approach to address regional nuances. 
+The Chennai zone has the highest concentration of high-risk employees, with 7 employees, representing 20% of the total high-risk population, suggesting localized operational issues that require immediate attention. This zone-wise distribution pattern indicates that 80% of high-risk employees are scattered across other zones, necessitating a more nuanced and targeted approach.
 
-Managerial effectiveness is a significant concern, as evidenced by the high number of employees reporting to certain territory managers who remain in a high-risk category, implying a potential gap in leadership capabilities or supervision. 
-
-The fact that all new high-risk employees have emerged in the current period suggests a lack of proactive measures to identify and address early warning signs, highlighting the need for enhanced monitoring and preventive
+Manager-wise, the Jodhpur, Howrah, and Trichur territories have the highest number of

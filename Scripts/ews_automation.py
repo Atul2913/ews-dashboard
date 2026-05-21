@@ -575,32 +575,34 @@ Top Managers:
 
 prompt = f"""
 
-You are a Senior HR Strategy Consultant preparing insights for leadership review.
+You are a Chief HR Analytics Officer preparing insights for CEO and leadership review.
 
-Analyze the employee risk data deeply and generate highly professional executive insights.
-
-Your insights must feel:
-- strategic
-- intelligent
-- business-oriented
-- realistic
-- impactful
-- leadership-ready
+Analyze the employee risk data deeply and generate highly intelligent business-impact insights.
 
 IMPORTANT:
-- Do NOT mention raw numbers repeatedly.
-- Do NOT write generic HR statements.
-- Do NOT use markdown.
-- Do NOT use headings like Trend or Actions.
-- Do NOT use bullet numbering.
-- Keep every insight short, sharp and meaningful.
-- Focus on business risk, employee behaviour, manager effectiveness, operational exposure, compliance concerns, field execution and future attrition risk.
-
-Generate ONLY 6 high-quality executive insights.
+- Every insight must contain numbers and analysis.
+- Insights should explain business impact.
+- Compare patterns and explain risk movement.
+- Mention operational concerns.
+- Mention employee behaviour patterns.
+- Mention manager effectiveness.
+- Mention future attrition or business risk possibility.
+- Insights should sound premium and executive-level.
+- Use simple business language.
+- Avoid generic HR statements.
+- Each insight should be 1-2 lines maximum.
+- Generate exactly 6 insights.
+- Do not use markdown.
+- Do not use headings.
+- Do not use bullet numbering.
 
 DATA SUMMARY:
 
 Total High Risk Employees: {high_count}
+
+Medium Risk Employees: {medium_count}
+
+Low Risk Employees: {low_count}
 
 New High Risk Employees: {new_high_risk}
 
@@ -608,14 +610,13 @@ Improved Employees: {improved_count}
 
 Still High Risk Employees: {still_high_risk}
 
-Zone-wise High Risk:
+Zone-wise High Risk Distribution:
 {zone_risk.to_string()}
 
-Manager-wise High Risk:
+Manager-wise High Risk Distribution:
 {manager_risk.to_string()}
 
 """
-
 # ==============================
 # AI API
 # ==============================
