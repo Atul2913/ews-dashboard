@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-import base64
 
 # ==========================================
 # PAGE CONFIG
@@ -105,34 +104,6 @@ html, body, [class*="css"] {
     margin-bottom: 20px;
 }
 
-/* REPORT BOX */
-.report-box {
-    background: #f9fafb;
-    padding: 25px;
-    border-radius: 18px;
-    line-height: 2;
-    font-size: 16px;
-    color: #1f2937;
-    border: 1px solid #d1d5db;
-}
-
-/* METRIC COLORS */
-.red {
-    color: #ef4444;
-}
-
-.yellow {
-    color: #f59e0b;
-}
-
-.green {
-    color: #10b981;
-}
-
-.blue {
-    color: #3b82f6;
-}
-
 /* TABLE */
 [data-testid="stDataFrame"] {
     border-radius: 15px;
@@ -180,59 +151,6 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-
-# ==========================================
-# SIDEBAR LOGO
-# ==========================================
-st.sidebar.markdown(
-    """
-    <style>
-    .sidebar-logo-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding-top: 5px;
-        padding-bottom: 20px;
-    }
-
-    .sidebar-logo-container img {
-        width: 90%;
-        max-width: 260px;
-        height: auto;
-        object-fit: contain;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
-# ==========================================
-# SIDEBAR LOGO
-# ==========================================
-st.sidebar.markdown(
-    """
-    <style>
-
-    .logo-wrapper {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: -10px;
-        margin-bottom: 25px;
-    }
-
-    .logo-wrapper img {
-        width: 230px;
-        height: auto;
-        object-fit: contain;
-    }
-
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
 # ==========================================
 # FILTER TITLE
 # ==========================================
@@ -251,6 +169,9 @@ st.sidebar.markdown(
     unsafe_allow_html=True
 )
 
+# ==========================================
+# FILTERS
+# ==========================================
 month = st.sidebar.selectbox(
     "Month",
     sorted(df_full['Month'].dropna().unique(), reverse=True)
@@ -272,7 +193,7 @@ manager_col = "Reporting to Territory Name"
 
 if manager_col in df.columns:
     manager = st.sidebar.multiselect(
-        "SD - Wise",
+        "SD Wise",
         sorted(df[manager_col].dropna().unique())
     )
 else:
@@ -310,46 +231,30 @@ else:
 # ==========================================
 c1, c2, c3, c4 = st.columns(4)
 
-with c1:
-    st.markdown(f"""
-    <div class="kpi-card">
-        <div class="kpi-title red">🔴 High Risk</div>
-        <div class="kpi-value">{high}</div>
-    </div>
-    """, unsafe_allow_html=True)
+cards = [
+    ("🔴 High Risk", high, "red"),
+    ("🟡 Medium Risk", medium, "yellow"),
+    ("🟢 Low Risk", low, "green"),
+    ("🆕 New Risk", new, "blue")
+]
 
-with c2:
-    st.markdown(f"""
-    <div class="kpi-card">
-        <div class="kpi-title yellow">🟡 Medium Risk</div>
-        <div class="kpi-value">{medium}</div>
-    </div>
-    """, unsafe_allow_html=True)
+for col, (title, value, color) in zip([c1, c2, c3, c4], cards):
 
-with c3:
-    st.markdown(f"""
-    <div class="kpi-card">
-        <div class="kpi-title green">🟢 Low Risk</div>
-        <div class="kpi-value">{low}</div>
-    </div>
-    """, unsafe_allow_html=True)
-
-with c4:
-    st.markdown(f"""
-    <div class="kpi-card">
-        <div class="kpi-title blue">🆕 New Risk</div>
-        <div class="kpi-value">{new}</div>
-    </div>
-    """, unsafe_allow_html=True)
+    with col:
+        st.markdown(f"""
+        <div class="kpi-card">
+            <div class="kpi-title {color}">{title}</div>
+            <div class="kpi-value">{value}</div>
+        </div>
+        """, unsafe_allow_html=True)
 
 # ==========================================
-# CHARTS SECTION
+# CHARTS
 # ==========================================
 st.markdown('<div class="section-box">', unsafe_allow_html=True)
 
 col1, col2 = st.columns(2)
 
-# Zone-wise
 zone_df = (
     df[df['Risk_Level'] == "High Risk"]
     .groupby('Zone Name')
@@ -368,9 +273,6 @@ fig1 = px.bar(
 
 fig1.update_layout(
     title="📍 Zone-wise High Risk",
-    title_font_size=22,
-    xaxis_title="Zone",
-    yaxis_title="Employees",
     height=450
 )
 
@@ -378,7 +280,6 @@ fig1.update_traces(textposition='outside')
 
 col1.plotly_chart(fig1, use_container_width=True)
 
-# Pie chart
 fig2 = px.pie(
     df,
     names='Risk_Level',
@@ -388,7 +289,6 @@ fig2 = px.pie(
 
 fig2.update_layout(
     title="🍩 Risk Distribution",
-    title_font_size=22,
     height=450
 )
 
@@ -397,7 +297,7 @@ col2.plotly_chart(fig2, use_container_width=True)
 st.markdown('</div>', unsafe_allow_html=True)
 
 # ==========================================
-# TREND + MANAGER
+# TREND + SD RISK
 # ==========================================
 st.markdown('<div class="section-box">', unsafe_allow_html=True)
 
@@ -421,7 +321,6 @@ fig3 = px.line(
 
 fig3.update_layout(
     title="📈 High Risk Trend",
-    title_font_size=22,
     height=450
 )
 
@@ -446,8 +345,7 @@ if manager_col in df.columns:
     )
 
     fig4.update_layout(
-        title="👨‍💼 SD - Wise Risk",
-        title_font_size=22,
+        title="👨‍💼 SD Wise Risk",
         xaxis_tickangle=-35,
         height=450
     )
@@ -457,7 +355,7 @@ if manager_col in df.columns:
 st.markdown('</div>', unsafe_allow_html=True)
 
 # ==========================================
-# HIGH RISK TABLE
+# TOP HIGH RISK EMPLOYEES
 # ==========================================
 st.markdown('<div class="section-box">', unsafe_allow_html=True)
 
@@ -473,19 +371,11 @@ top_df = (
     .reset_index(drop=True)
 )
 
-# ==========================================
-# SERIAL NUMBER
-# ==========================================
-
 top_df.insert(
     0,
     "Sr No",
     range(1, len(top_df) + 1)
 )
-
-# ==========================================
-# DISPLAY TABLE
-# ==========================================
 
 display_cols = [
     'Sr No',
@@ -533,14 +423,7 @@ else:
 
     new_risk_df = df[df['Risk_Level'] == "High Risk"]
 
-# ==========================================
-# SERIAL NUMBER
-# ==========================================
-
-new_risk_df = (
-    new_risk_df
-    .reset_index(drop=True)
-)
+new_risk_df = new_risk_df.reset_index(drop=True)
 
 new_risk_df.insert(
     0,
@@ -575,12 +458,9 @@ st.dataframe(
 st.markdown('</div>', unsafe_allow_html=True)
 
 # ==========================================
-# EXECUTIVE REPORT
+# EXECUTIVE AI INSIGHTS
 # ==========================================
-
-# ==============================
-# LOAD AI REPORT
-# ==============================
+st.markdown('<div class="section-box">', unsafe_allow_html=True)
 
 try:
 
@@ -597,74 +477,71 @@ try:
 except:
 
     report_text = (
-        "No AI insights available"
+        "AI insights not available"
     )
 
-st.markdown(f"""
-<div class="report-box">
+report_text = (
+    report_text
+    .replace("---TREND---", "")
+    .replace("---ACTIONS---", "")
+    .replace("---AI INSIGHTS---", "")
+    .replace(
+        "Here are 4 short business insights based on the data:",
+        ""
+    )
+    .strip()
+)
 
-<h3 style="color:#2563eb;">
-🤖 Executive AI Insights
-</h3>
-
-<p>{report_text.replace(chr(10), "<br><br>")}</p>
-
-</div>
-""", unsafe_allow_html=True)
-
-# ==========================================
-# EXTRACT REQUIRED SECTIONS
-# ==========================================
-sections = {}
-current_section = None
+clean_lines = []
 
 for line in report_text.splitlines():
 
     line = line.strip()
 
-    if line.startswith("---") and line.endswith("---"):
+    if line:
 
-        current_section = line.replace("-", "").strip()
+        if line[0].isdigit():
 
-        sections[current_section] = []
+            if "." in line:
 
-    elif current_section and line:
+                line = (
+                    line
+                    .split(".", 1)[-1]
+                    .strip()
+                )
 
-        sections[current_section].append(line)
+        clean_lines.append(line)
 
-trend_section = "<br>".join(
-    sections.get("TREND", [])
+report_text = "<br><br>".join(clean_lines)
+
+st.markdown(
+    '''
+    <div class="section-heading">
+    🤖 Executive AI Insights
+    </div>
+    ''',
+    unsafe_allow_html=True
 )
 
-actions_section = "<br>".join(
-    sections.get("ACTIONS", [])
+st.markdown(
+    f"""
+    <div style="
+        background:#f9fafb;
+        padding:28px;
+        border-radius:20px;
+        line-height:2.2;
+        font-size:18px;
+        color:#1f2937;
+        border:1px solid #d1d5db;
+        box-shadow:0 4px 18px rgba(0,0,0,0.05);
+    ">
+
+    {report_text}
+
+    </div>
+    """,
+    unsafe_allow_html=True
 )
-
-ai_section = "<br>".join(
-    sections.get("AI INSIGHTS", [])
-)
-
-# ==========================================
-# DISPLAY SHORT REPORT
-# ==========================================
-st.markdown(f"""
-<div class="report-box">
-
-<h3 style="color:#2563eb;">📈 Trend</h3>
-<p>{trend_section}</p>
-
-<br>
-
-<h3 style="color:#dc2626;">🎯 Actions</h3>
-<p>{actions_section}</p>
-
-<br>
-
-<h3 style="color:#16a34a;">🤖 AI Insights</h3>
-<p>{ai_section}</p>
-
-</div>
-""", unsafe_allow_html=True)
 
 st.markdown('</div>', unsafe_allow_html=True)
 
