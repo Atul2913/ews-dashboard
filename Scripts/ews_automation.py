@@ -204,8 +204,33 @@ if USE_REPORT_SCORE:
         active_df['Count of Red Flags']
     )
 
+    # ==============================
+    # STANDARDIZE RISK LEVEL
+    # ==============================
+
+    active_df['Category'] = (
+        active_df['Category']
+        .astype(str)
+        .str.strip()
+        .str.lower()
+    )
+
+
+    def clean_risk(x):
+
+        if "high" in x:
+            return "High Risk"
+
+        elif "medium" in x:
+            return "Medium Risk"
+
+        else:
+            return "Low Risk"
+
+
     active_df['Risk_Level'] = (
         active_df['Category']
+        .apply(clean_risk)
     )
 
 # =====================================================
