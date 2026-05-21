@@ -570,35 +570,46 @@ Top Managers:
 
 """
 
-
-
 prompt = f"""
 
-You are an HR Risk Analytics AI.
+You are a Senior HR Strategy Consultant preparing insights for leadership review.
 
-Analyze the HR risk dataset and provide output ONLY in below format.
+Analyze the employee risk data deeply and generate highly professional executive insights.
 
-STRICT FORMAT:
+Your insights must feel:
+- strategic
+- intelligent
+- business-oriented
+- realistic
+- impactful
+- leadership-ready
 
----TREND---
-Write only 2 short trend points.
+IMPORTANT:
+- Do NOT mention raw numbers repeatedly.
+- Do NOT write generic HR statements.
+- Do NOT use markdown.
+- Do NOT use headings like Trend or Actions.
+- Do NOT use bullet numbering.
+- Keep every insight short, sharp and meaningful.
+- Focus on business risk, employee behaviour, manager effectiveness, operational exposure, compliance concerns, field execution and future attrition risk.
 
----ACTIONS---
-Write only 3 short recommended actions.
+Generate ONLY 6 high-quality executive insights.
 
----AI INSIGHTS---
-Write only 4 short business insights.
+DATA SUMMARY:
 
-RULES:
-- Do NOT write introduction.
-- Do NOT write explanation.
-- Do NOT write markdown.
-- Do NOT write bullet numbering.
-- Keep every point short.
-- Output should be clean text only.
+Total High Risk Employees: {high_count}
 
-DATA:
-{summary_text}
+New High Risk Employees: {new_high_risk}
+
+Improved Employees: {improved_count}
+
+Still High Risk Employees: {still_high_risk}
+
+Zone-wise High Risk:
+{zone_risk.to_string()}
+
+Manager-wise High Risk:
+{manager_risk.to_string()}
 
 """
 

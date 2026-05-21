@@ -446,7 +446,7 @@ if manager_col in df.columns:
     )
 
     fig4.update_layout(
-        title="👨‍💼 SD - wise Risk",
+        title="👨‍💼 SD - Wise Risk",
         title_font_size=22,
         xaxis_tickangle=-35,
         height=450
@@ -577,34 +577,17 @@ st.markdown('</div>', unsafe_allow_html=True)
 # ==========================================
 # EXECUTIVE REPORT
 # ==========================================
-st.markdown('<div class="section-box">', unsafe_allow_html=True)
+st.markdown(f"""
+<div class="report-box">
 
-st.markdown(
-    '<div class="section-heading">📊 Executive Report</div>',
-    unsafe_allow_html=True
-)
+<h3 style="color:#2563eb;">
+🤖 Executive AI Insights
+</h3>
 
-try:
+<p>{report_text.replace(chr(10), "<br><br>")}</p>
 
-    report_path = f"output/EWS_Report_{month}.txt"
-
-    with open(report_path, "r", encoding="utf-8") as f:
-        report_text = f.read()
-
-except Exception as e:
-
-    report_text = f"""
---- TREND ---
-No report available
-
---- ACTIONS ---
-No actions available
-
---- AI INSIGHTS ---
-No AI insights available
-"""
-
-
+</div>
+""", unsafe_allow_html=True)
 
 # ==========================================
 # EXTRACT REQUIRED SECTIONS
