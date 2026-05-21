@@ -272,7 +272,7 @@ manager_col = "Reporting to Territory Name"
 
 if manager_col in df.columns:
     manager = st.sidebar.multiselect(
-        "Manager",
+        "SD - Wise",
         sorted(df[manager_col].dropna().unique())
     )
 else:
@@ -446,7 +446,7 @@ if manager_col in df.columns:
     )
 
     fig4.update_layout(
-        title="👨‍💼 Manager-wise Risk",
+        title="👨‍💼 SD - wise Risk",
         title_font_size=22,
         xaxis_tickangle=-35,
         height=450
@@ -470,12 +470,41 @@ top_df = (
     df[df['Risk_Level'] == "High Risk"]
     .sort_values(by='EWS_Score', ascending=False)
     .head(10)
+    .reset_index(drop=True)
 )
 
+# ==========================================
+# SERIAL NUMBER
+# ==========================================
+
+top_df.insert(
+    0,
+    "Sr No",
+    range(1, len(top_df) + 1)
+)
+
+# ==========================================
+# DISPLAY TABLE
+# ==========================================
+
+display_cols = [
+    'Sr No',
+    'Employee Name',
+    'Designation',
+    'Zone Name',
+    'EWS_Score'
+]
+
+available_cols = [
+    c for c in display_cols
+    if c in top_df.columns
+]
+
 st.dataframe(
-    top_df[['Employee Name', 'Zone Name', 'EWS_Score']],
+    top_df[available_cols],
     use_container_width=True,
-    height=400
+    height=400,
+    hide_index=True
 )
 
 st.markdown('</div>', unsafe_allow_html=True)
@@ -504,8 +533,25 @@ else:
 
     new_risk_df = df[df['Risk_Level'] == "High Risk"]
 
+# ==========================================
+# SERIAL NUMBER
+# ==========================================
+
+new_risk_df = (
+    new_risk_df
+    .reset_index(drop=True)
+)
+
+new_risk_df.insert(
+    0,
+    "Sr No",
+    range(1, len(new_risk_df) + 1)
+)
+
 show_cols = [
+    'Sr No',
     'Employee Name',
+    'Designation',
     'Zone Name',
     'Division',
     'Coverage',
@@ -522,7 +568,8 @@ available_cols = [
 st.dataframe(
     new_risk_df[available_cols],
     use_container_width=True,
-    height=450
+    height=450,
+    hide_index=True
 )
 
 st.markdown('</div>', unsafe_allow_html=True)
