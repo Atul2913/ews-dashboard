@@ -490,18 +490,116 @@ new = (
 # AI PROMPT
 # ==============================
 
+# ==============================
+# AI SUMMARY VARIABLES
+# ==============================
+
+high_count = len(
+    active_df[
+        active_df['Risk_Level'] == 'High Risk'
+    ]
+)
+
+medium_count = len(
+    active_df[
+        active_df['Risk_Level'] == 'Medium Risk'
+    ]
+)
+
+low_count = len(
+    active_df[
+        active_df['Risk_Level'] == 'Low Risk'
+    ]
+)
+
+# ==============================
+# TOP ZONES
+# ==============================
+
+zone_risk = (
+    active_df[
+        active_df['Risk_Level'] == 'High Risk'
+    ]
+    .groupby('Zone Name')
+    .size()
+    .sort_values(ascending=False)
+    .head(5)
+)
+
+# ==============================
+# TOP MANAGERS
+# ==============================
+
+manager_risk = (
+    active_df[
+        active_df['Risk_Level'] == 'High Risk'
+    ]
+    .groupby('Reporting to Territory Name')
+    .size()
+    .sort_values(ascending=False)
+    .head(5)
+)
+
+# ==============================
+# OTHER METRICS
+# ==============================
+
+new_high_risk = high_count
+improved_count = 0
+still_high_risk = high_count
+
+# ==============================
+# SUMMARY TEXT FOR AI
+# ==============================
+
+summary_text = f"""
+
+Total High Risk Employees: {high_count}
+
+New High Risk Employees: {new_high_risk}
+
+Improved Employees: {improved_count}
+
+Still High Risk Employees: {still_high_risk}
+
+Top Zones:
+{zone_risk.to_string()}
+
+Top Managers:
+{manager_risk.to_string()}
+
+"""
+
+
+
 prompt = f"""
-You are an HR Risk Analyst.
 
-IMPORTANT:
-Still High Risk means no improvement.
+You are an HR Risk Analytics AI.
 
-Total High Risk: {total_high}
-Still High Risk: {stayed}
-Improved: {improved}
-New High Risk: {new}
+Analyze the HR risk dataset and provide output ONLY in below format.
 
-Give 4 short business insights.
+STRICT FORMAT:
+
+---TREND---
+Write only 2 short trend points.
+
+---ACTIONS---
+Write only 3 short recommended actions.
+
+---AI INSIGHTS---
+Write only 4 short business insights.
+
+RULES:
+- Do NOT write introduction.
+- Do NOT write explanation.
+- Do NOT write markdown.
+- Do NOT write bullet numbering.
+- Keep every point short.
+- Output should be clean text only.
+
+DATA:
+{summary_text}
+
 """
 
 # ==============================

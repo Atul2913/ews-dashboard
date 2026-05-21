@@ -1,6 +1,14 @@
-Here are 4 short business insights based on the data:
+---TREND---
+High risk employees remain unchanged at 35
+New high risk employees equal total high risk employees
 
-1. **Overall Risk Reduction**: We've seen a significant reduction in total high-risk cases, from an initial count to 35, with 25 cases showing improvement.
-2. **Persistent Risks**: However, 8 high-risk cases remain unresolved, indicating that some underlying issues still require attention and mitigation strategies.
-3. **Emerging Threats**: The 27 new high-risk cases highlight the need for ongoing monitoring and proactive measures to address emerging risks and prevent them from becoming entrenched.
-4. **Net Increase in High Risk**: Despite improvements, the total number of high-risk cases has actually increased by 2 (from 35 initial to 35 total now), suggesting that new risks
+---ACTIONS---
+Implement targeted training for high risk employees
+Conduct zone-specific risk assessments
+Develop manager-specific coaching plans
+
+---AI INSIGHTS---
+CHENNAI-ZM has the highest number of high risk employees
+GHAZIABAD-ZM and CALCUTTA-ZM require immediate attention
+JODHPUR-SD and HOWRAH-SD have the most high risk reports
+DELHI-ZM and PUNJAB-ZM are potential high risk zones
