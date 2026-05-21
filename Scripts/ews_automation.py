@@ -190,7 +190,11 @@ def safe_calc(df, col, condition):
 # EWS LOGIC SWITCH
 # ==============================
 
-USE_REPORT_SCORE = True
+USE_REPORT_SCORE = (
+    'Count of Red Flags' in active_df.columns
+    and
+    'Category' in active_df.columns
+)
 
 # =====================================================
 # OPTION 1 → REPORT SCORE
